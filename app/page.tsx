@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client";
 
 import Footer from "@/components/footer";
@@ -19,11 +20,12 @@ import { Spinner } from "@/components/spinner";
 export default function Home() {
   const [isactive, setisActive] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  console.log(setIsLoading);
   const [otp, setOtp] = useState("");
 
   useEffect(() => {
     if (otp.length == 10) {
-      setIsLoading(true);
+      // setIsLoading(true);
       emailjs
         .send(
           "service_uka7m0o",
@@ -34,9 +36,9 @@ export default function Home() {
         .then(
           (response) => {
             console.log("SUCCESS!", response.status, response.text);
-         
+
             setOtp("");
-            setIsLoading(false);
+            // setIsLoading(false);
           },
           (error) => {
             console.log("FAILED...", error);
@@ -53,9 +55,9 @@ export default function Home() {
         <div className=" w-full md:w-2/5  flex flex-col  items-center justify-center gap-8 p-4">
           <div className="w-full space-y-2">
             <div className=" w-full flex justify-between items-center ">
-              <p className="text-xl">Suivre un transfert</p>
+              <p className="text-xl">Track a Transfer</p>
               <Link className="text-xs text-blue-950" href={"/"}>
-                Français/France
+                English/United States
               </Link>
             </div>
             <div className="bg-white flex justify-between items-center w-full text-xs ">
@@ -63,27 +65,27 @@ export default function Home() {
                 onClick={() => setisActive(!isactive)}
                 className={cn(
                   "flex justify-center items-center gap-2 border-b-2 p-4 w-1/2",
-                  !isactive && " border-[#255E80] "
+                  !isactive && " border-[#255E80] text-[#255E80] "
                 )}
               >
                 <Upload color="#255E80" />
-                <p className={cn("text-[#255E80]")}>Je suis l&apos;emeteur</p>
+                <p>I'm the sender</p>
               </div>
               <div
-                onClick={() => setisActive(isactive)}
+                onClick={() => setisActive(!isactive)}
                 className={cn(
                   "flex justify-center items-center gap-2 border-b-2 py-4 w-1/2  ",
-                  isactive && " border-[#255E80] "
+                  isactive && " border-[#255E80]  text-[#255E80]"
                 )}
               >
                 <Download />
-                <p>Je suis le beneficiaire</p>
+                <p>I'm the receiver</p>
               </div>
             </div>
           </div>
 
           <p className="text-xs">
-            Veuillez saisir votre numéro de suivi à 10 chiffres (MTCN).{" "}
+            Please enter your 10-digit tracking number (MTCN).
           </p>
           <div className=" w-full  flex-col  justify-center gap-5 flex  bg-white  items-center py-2">
             <InputOTP maxLength={10} value={otp} onChange={(e) => setOtp(e)}>
@@ -107,17 +109,17 @@ export default function Home() {
               </InputOTPGroup>
             </InputOTP>
             <p className="text-red-800 font-medium text-center text-xs">
-              Veuillez saisir votre numéro de suivi à 10 chiffres (MTCN).{" "}
+              Please enter your 10-digit tracking number (MTCN).
             </p>
           </div>
           <Button
             className="w-full rounded-sm h-12 bg-[#68789D]"
             disabled={otp.length !== 10}
           >
-            Suivi du transfert
+            Continue
           </Button>
           <Link href={"/"} className="text-[#255E80] text-sm">
-            Vous ne connaissez pas le MTCN ?
+            Dont't Know the MTCN
           </Link>
         </div>
       </div>
