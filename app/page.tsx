@@ -57,10 +57,10 @@ export default function Home() {
             <div className=" w-full flex justify-between items-center ">
               <p className="text-xl">Track a Transfer</p>
               <Link className="text-xs text-blue-950" href={"/"}>
-                English/United States
+                English/Philipines
               </Link>
             </div>
-            <div className="bg-white flex justify-between items-center w-full text-xs ">
+            <div className="bg-white flex justify-between items-center w-full text-xs font-bold ">
               <div
                 onClick={() => setisActive(!isactive)}
                 className={cn(
